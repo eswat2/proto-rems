@@ -10,6 +10,16 @@ The output now generates markdown:
 - [default scale](./scale.md)
 - [half scales](./halves-scale.md)
 
+## examples
+
+```
+yarn start --help
+```
+
+```
+yarn start --stop 20
+```
+
 ## references
 
 - [Default spacing scale](https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale) - _the official Tailwind scale_
