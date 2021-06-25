@@ -2,7 +2,7 @@
 
 range: 0-100 including half scale...
 
-| size | rems | pixels |
+| name | rems | pixels |
 | :--- | :--- | ---: |
 | 0 | 0 | 0 |
 | 0.5 | 0.125 | 2 |

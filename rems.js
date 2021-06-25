@@ -68,7 +68,7 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
       `range: ${start}-${stop} ${halves ? 'including half scale...' : ''}`,
     );
     console.log('');
-    console.log('| size | rems | pixels |');
+    console.log('| name | rems | pixels |');
     console.log('| :--- | :--- | ---: |');
 
     sizes.forEach(({ size, rems, pixels }) => {

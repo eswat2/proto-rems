@@ -2,14 +2,13 @@
   "name": "proto-rems",
   "version": "0.0.1",
   "description": "utility to generate missing spacing scales for Tailwind...",
-  "main": "index.js",
+  "main": "rems.js",
   "repository": "git@github.com:eswat2/proto-rems.git",
   "author": "Richard Hess <eswat2@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "format": "prettier --write *.js",
-    "rems": "node index.js"
+    "format": "prettier --write *.js"
   },
   "dependencies": {
     "yargs": "17.0.1"

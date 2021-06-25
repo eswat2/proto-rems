@@ -2,7 +2,7 @@
 
 range: 0-100 
 
-| size | rems | pixels |
+| name | rems | pixels |
 | :--- | :--- | ---: |
 | 0 | 0 | 0 |
 | 1 | 0.25 | 4 |
