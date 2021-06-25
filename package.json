@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "format": "prettier --write *.js",
-    "start": "node index.js"
+    "rems": "node index.js"
   },
   "dependencies": {
     "yargs": "17.0.1"

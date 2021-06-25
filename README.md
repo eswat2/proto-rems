@@ -13,11 +13,19 @@ The output now generates markdown:
 ## examples
 
 ```
-yarn start --help
+yarn rems --help
+```
+```
+yarn rems --stop 90 --start 80
 ```
 
+if you want to save the markdown, run the following:
+
 ```
-yarn start --stop 20
+node index.js > foo.md
+```
+```
+node index.js --stop 90 --start 80 > foobar.md
 ```
 
 ## references
