@@ -1,39 +1,46 @@
 var { argv } = require('yargs')
   .scriptName('rems')
-  .usage('Usage: $0 [--start num] [--stop num] [-h] [-e]')
+  .usage('Usage: $0 [--start num] [--stop num] [-h] [-e] [-p]')
   .option('x', {
     alias: 'start',
     describe: 'Start Value',
     default: 0,
-    type: 'number',
+    number: true,
     nargs: 1,
   })
   .option('z', {
     alias: 'stop',
     describe: 'Stop Value',
     default: 100,
-    type: 'number',
+    number: true,
     nargs: 1,
   })
   .option('h', {
     alias: 'halves',
     describe: 'Enable Halves',
     default: false,
-    type: 'boolean',
+    boolean: true,
     nargs: 0,
   })
   .option('e', {
     alias: 'export',
     describe: 'Export as Config',
     default: false,
-    type: 'boolean',
+    boolean: true,
+    nargs: 0,
+  })
+  .option('p', {
+    alias: 'pixels',
+    describe: 'Export Pixels',
+    default: false,
+    boolean: true,
     nargs: 0,
   })
   .option('d', {
     alias: 'debug',
     describe: 'Debug output',
     default: false,
-    type: 'boolean',
+    boolean: true,
     nargs: 0,
   })
   .describe('help', 'Show help...')
@@ -47,7 +54,7 @@ const base = {
 };
 
 const debug = false;
-const markdown = argv.export ? false : true;
+const markdown = argv.export || argv.pixels ? false : true;
 const skip = [];
 
 /**
@@ -94,9 +101,13 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
       console.log('theme: {');
       console.log('  extend: {');
       console.log('    spacing: {');
-      sizes.forEach(({ size, rems }) => {
+      sizes.forEach(({ size, rems, pixels }) => {
         const safe = size.toString().replace('.', 'p');
-        console.log(`      "${safe}": "${rems}rem",`);
+        if (argv.pixels) {
+          console.log(`      "${safe}": "${pixels}px",`);
+        } else {
+          console.log(`      "${safe}": "${rems}rem",`);
+        }
       });
       console.log('    }');
       console.log('  }');
