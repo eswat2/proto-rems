@@ -1,13 +1,6 @@
 var { argv } = require('yargs')
   .scriptName('rems')
-  .usage('Usage: $0 -z num -x num -h')
-  .option('z', {
-    alias: 'stop',
-    describe: 'Stop Value',
-    default: 100,
-    type: 'number',
-    nargs: 1,
-  })
+  .usage('Usage: $0 [--start num] [--stop num] [-h] [-e]')
   .option('x', {
     alias: 'start',
     describe: 'Start Value',
@@ -15,9 +8,30 @@ var { argv } = require('yargs')
     type: 'number',
     nargs: 1,
   })
+  .option('z', {
+    alias: 'stop',
+    describe: 'Stop Value',
+    default: 100,
+    type: 'number',
+    nargs: 1,
+  })
   .option('h', {
     alias: 'halves',
     describe: 'Enable Halves',
+    default: false,
+    type: 'boolean',
+    nargs: 0,
+  })
+  .option('e', {
+    alias: 'export',
+    describe: 'Export as Config',
+    default: false,
+    type: 'boolean',
+    nargs: 0,
+  })
+  .option('d', {
+    alias: 'debug',
+    describe: 'Debug output',
     default: false,
     type: 'boolean',
     nargs: 0,
@@ -33,7 +47,7 @@ const base = {
 };
 
 const debug = false;
-const markdown = true;
+const markdown = argv.export ? false : true;
 const skip = [];
 
 /**
@@ -60,22 +74,34 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
     }
   });
 
-  //
-  if (markdown) {
-    console.log('# Tailwind spacing scale:');
-    console.log('');
-    console.log(
-      `range: ${start}-${stop} ${halves ? 'including half scale...' : ''}`,
-    );
-    console.log('');
-    console.log('| name | rems | pixels |');
-    console.log('| :--- | :--- | ---: |');
-
-    sizes.forEach(({ size, rems, pixels }) => {
-      console.log(`| ${size} | ${rems} | ${pixels} |`);
-    });
-  } else {
+  if (argv.debug) {
     console.table(sizes, ['size', 'rems', 'pixels']);
+  } else {
+    if (markdown) {
+      console.log('# Tailwind spacing scale:');
+      console.log('');
+      console.log(
+        `range: ${start}-${stop} ${halves ? 'including half scale...' : ''}`,
+      );
+      console.log('');
+      console.log('| name | rems | pixels |');
+      console.log('| :--- | :--- | ---: |');
+
+      sizes.forEach(({ size, rems, pixels }) => {
+        console.log(`| ${size} | ${rems} | ${pixels} |`);
+      });
+    } else {
+      console.log('theme: {');
+      console.log('  extend: {');
+      console.log('    spacing: {');
+      sizes.forEach(({ size, rems }) => {
+        const safe = size.toString().replace('.', 'p');
+        console.log(`      "${safe}": "${rems}rem",`);
+      });
+      console.log('    }');
+      console.log('  }');
+      console.log('},');
+    }
   }
 };
 
