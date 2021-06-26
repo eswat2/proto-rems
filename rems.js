@@ -123,13 +123,41 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
   }
 };
 
-const isFractional = (flag, start, stop) => {
-  return flag || !Number.isInteger(start) || !Number.isInteger(stop)
+const sanitize = (flag, values) => {
+  let integers = true;
+
+  const list = values.map(num => {
+    if (!Number.isInteger(num)) {
+      const base = Math.floor(num);
+      const step = num - base;
+      // NOTE:  only half steps are valid...
+      if (step === 0.5) {
+        integers = false;
+        return num;
+      } else {
+        // NOTE: if it's an invalid step, default to integer steps...
+        return base;
+      }
+    } else {
+      return num;
+    }
+  })
+  
+  return {
+    halves: flag || !integers,
+    values: list
+  }
 }
 
 if (argv.single) {
   const value = argv.start || argv.stop;
-  getSizes(value, value, isFractional(argv.halves, value, value));
+  const { halves, values } = sanitize(argv.halves, [value]);
+  const stop = values[0];
+  const start = stop;
+  getSizes(stop, start, halves);
 } else {
-  getSizes(argv.stop, argv.start, isFractional(argv.halves, argv.start, argv.stop));
+  const { halves, values } = sanitize(argv.halves, [argv.stop, argv.start]);
+  const stop = values[0];
+  const start = values[1];
+  getSizes(stop, start, halves);
 }
