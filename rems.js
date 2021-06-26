@@ -123,9 +123,13 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
   }
 };
 
+const isFractional = (flag, start, stop) => {
+  return flag || !Number.isInteger(start) || !Number.isInteger(stop)
+}
+
 if (argv.single) {
   const value = argv.start || argv.stop;
-  getSizes(value, value, argv.halves);
+  getSizes(value, value, isFractional(argv.halves, value, value));
 } else {
-  getSizes(argv.stop, argv.start, argv.halves);
+  getSizes(argv.stop, argv.start, isFractional(argv.halves, argv.start, argv.stop));
 }
