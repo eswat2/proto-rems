@@ -1,5 +1,5 @@
 var { argv } = require('yargs')
-  .scriptName('px2tw')
+  .scriptName('pixels')
   .usage('Usage: $0 [--start num] [--stop num] [-e]')
   .option('x', {
     alias: 'start',
