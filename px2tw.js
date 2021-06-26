@@ -1,26 +1,19 @@
 var { argv } = require('yargs')
-  .scriptName('rems')
-  .usage('Usage: $0 [--start num] [--stop num] [-h] [-e] [-p]')
+  .scriptName('px2tw')
+  .usage('Usage: $0 [--start num] [--stop num] [-e]')
   .option('x', {
     alias: 'start',
-    describe: 'Start Value',
+    describe: 'Start Value (px)',
     default: 0,
     number: true,
     nargs: 1,
   })
   .option('z', {
     alias: 'stop',
-    describe: 'Stop Value',
+    describe: 'Stop Value (px)',
     default: 100,
     number: true,
     nargs: 1,
-  })
-  .option('h', {
-    alias: 'halves',
-    describe: 'Enable Halves',
-    default: false,
-    boolean: true,
-    nargs: 0,
   })
   .option('s', {
     alias: 'single',
@@ -32,13 +25,6 @@ var { argv } = require('yargs')
   .option('e', {
     alias: 'export',
     describe: 'Export as Config',
-    default: false,
-    boolean: true,
-    nargs: 0,
-  })
-  .option('p', {
-    alias: 'pixels',
-    describe: 'Export Pixels',
     default: false,
     boolean: true,
     nargs: 0,
@@ -61,8 +47,7 @@ const base = {
 };
 
 const debug = false;
-const markdown = argv.export || argv.pixels ? false : true;
-const skip = [];
+const markdown = argv.export ? false : true;
 
 /**
  * getSizes
@@ -71,21 +56,19 @@ const skip = [];
  * @param {int} start
  * @return {object}
  */
-const getSizes = (stop = 100, start = 0, halves = false) => {
+const getSizes = (stop = 100, start = 0) => {
   // The following generates an array of increasing values from the totalSizes above.
-  const sizeArray = Array.from(Array(stop * (halves ? 2 : 1) + 1).keys());
-  const sliced = sizeArray.slice(start * (halves ? 2 : 1), sizeArray.length);
+  const sizeArray = Array.from(Array(stop + 1).keys());
+  const sliced = sizeArray.slice(start, sizeArray.length);
   debug && console.log('-- sliced: ', sliced.length, sliced);
   const sizes = [];
 
   sliced.forEach(x => {
     const { tag, rem, px } = base;
-    const size = x * tag * (halves ? 1 : 2);
-    const rems = x * rem * (halves ? 1 : 2);
-    const pixels = x * px * (halves ? 1 : 2);
-    if (!skip.includes(size)) {
-      sizes.push({ size, rems, pixels });
-    }
+    const size = (x / px) * tag;
+    const rems = size * (2 * rem);
+    const pixels = x;
+    sizes.push({ size, rems, pixels });
   });
 
   if (argv.debug) {
@@ -94,9 +77,7 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
     if (markdown) {
       console.log('# Tailwind spacing scale:');
       console.log('');
-      console.log(
-        `range: ${start}-${stop} ${halves ? 'including half scale...' : ''}`,
-      );
+      console.log(`range: ${start}px-${stop}px`);
       console.log('');
       console.log('| name | rems | pixels |');
       console.log('| :--- | :--- | ---: |');
@@ -110,11 +91,7 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
       console.log('    spacing: {');
       sizes.forEach(({ size, rems, pixels }) => {
         const safe = size.toString().replace('.', 'p');
-        if (argv.pixels) {
-          console.log(`      "${safe}": "${pixels}px",`);
-        } else {
-          console.log(`      "${safe}": "${rems}rem",`);
-        }
+        console.log(`      "${safe}": "${pixels}px",`);
       });
       console.log('    }');
       console.log('  }');
@@ -125,7 +102,7 @@ const getSizes = (stop = 100, start = 0, halves = false) => {
 
 if (argv.single) {
   const value = argv.start || argv.stop;
-  getSizes(value, value, argv.halves);
+  getSizes(value, value);
 } else {
-  getSizes(argv.stop, argv.start, argv.halves);
+  getSizes(argv.stop, argv.start);
 }
