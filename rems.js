@@ -1,7 +1,7 @@
 var { argv } = require('yargs')
   .scriptName('rems')
   .usage('Usage: $0 [--start num] [--stop num] [-h] [-e] [-p]')
-  .option('x', {
+  .option('a', {
     alias: 'start',
     describe: 'Start Value',
     default: 0,

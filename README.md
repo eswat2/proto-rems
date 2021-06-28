@@ -21,9 +21,10 @@ Usage: rems [--start num] [--stop num] [-h] [-e] [-p]
 Options:
       --help     Show help...                                          [boolean]
       --version  0.0.1                                                 [boolean]
-  -x, --start    Start Value                               [number] [default: 0]
+  -a, --start    Start Value                               [number] [default: 0]
   -z, --stop     Stop Value                              [number] [default: 100]
   -h, --halves   Enable Halves                        [boolean] [default: false]
+  -s, --single   Single Value                         [boolean] [default: false]
   -e, --export   Export as Config                     [boolean] [default: false]
   -p, --pixels   Export Pixels                        [boolean] [default: false]
   -d, --debug    Debug output                         [boolean] [default: false]
@@ -53,6 +54,10 @@ if you want to export the spacings so that you can drop them into the tailwind.c
 ```
 node rems --start 76.5 --stop 76.5 -h -e
 ```
+```
+node rems --start 76.5 --single -e
+node rems --stop 76.5 --single -e
+```
 
 which generates:
 
@@ -76,8 +81,8 @@ theme: {
 if you really only want to work with pixels, you can export the spacing scale with the '-p' option and it will output pixels instead of rems:
 
 ```
-node rems --start 76.5 --stop 76.5 -h -p
-node rems --start 76.5 --stop 76.5 -h -e -p
+node rems --start 76.5 --single -p
+node rems --start 76.5 --single -e -p
 ```
 
 both generate:
