@@ -11,6 +11,6 @@
     "format": "prettier --write *.js"
   },
   "dependencies": {
-    "yargs": "17.6.0"
+    "yargs": "17.6.1"
   }
 }
