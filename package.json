@@ -9,6 +9,7 @@
   "private": false,
   "scripts": {
     "bump": "bumpp patch --yes",
+    "release": "echo --skip",
     "preinstall": "npx only-allow pnpm",
     "format": "prettier --write *.js"
   },
