@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       bumpp:
-        specifier: 10.4.0
-        version: 10.4.0
+        specifier: 10.4.1
+        version: 10.4.1
       only-allow:
         specifier: 1.2.2
         version: 1.2.2
@@ -38,8 +38,8 @@ packages:
   args-tokenizer@0.3.0:
     resolution: {integrity: sha512-xXAd7G2Mll5W8uo37GETpQ2VrE84M181Z7ugHFGQnJZ50M2mbOv0osSZ9VsSgPfJQ+LVG0prSi0th+ELMsno7Q==}
 
-  bumpp@10.4.0:
-    resolution: {integrity: sha512-VzJhB4iyZ04w99HreEvXJY/lxzApnE/PRbcFY4cKnOUSRVbRbAf0AIU0DeavrkffW+mclJlkmnQYn9NdwcBk1g==}
+  bumpp@10.4.1:
+    resolution: {integrity: sha512-X/bwWs5Gbb/D7rN4aHLB7zdjiA6nGdjckM1sTHhI9oovIbEw2L5pw5S4xzk8ZTeOZ8EnwU/Ze4SoZ6/Vr3pM2Q==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -127,8 +127,8 @@ packages:
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
 
-  nypm@0.6.4:
-    resolution: {integrity: sha512-1TvCKjZyyklN+JJj2TS3P4uSQEInrM/HkkuSXsEzm1ApPgBffOn8gFguNnZf07r/1X6vlryfIqMUkJKQMzlZiw==}
+  nypm@0.6.5:
+    resolution: {integrity: sha512-K6AJy1GMVyfyMXRVB88700BJqNUkByijGJM8kEHpLdcAt+vSQAVfkWWHYzuRXHSY6xA2sNc5RjTj0p9rE2izVQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -222,7 +222,7 @@ snapshots:
 
   args-tokenizer@0.3.0: {}
 
-  bumpp@10.4.0:
+  bumpp@10.4.1:
     dependencies:
       ansis: 4.2.0
       args-tokenizer: 0.3.0
@@ -301,7 +301,7 @@ snapshots:
       consola: 3.4.2
       defu: 6.1.4
       node-fetch-native: 1.6.7
-      nypm: 0.6.4
+      nypm: 0.6.5
       pathe: 2.0.3
 
   jiti@2.6.1: {}
@@ -310,7 +310,7 @@ snapshots:
 
   node-fetch-native@1.6.7: {}
 
-  nypm@0.6.4:
+  nypm@0.6.5:
     dependencies:
       citty: 0.2.0
       pathe: 2.0.3
