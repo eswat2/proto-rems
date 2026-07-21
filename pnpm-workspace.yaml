@@ -1,0 +1,10 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+allowBuilds:
+  'esbuild': true
+  'proto-tailwindcss-clrs': true
+
+minimumReleaseAgeExclude:
+  - bumpp@12.0.0
