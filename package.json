@@ -15,7 +15,7 @@
     "format": "prettier --write *.js"
   },
   "dependencies": {
-    "bumpp": "12.1.1",
+    "bumpp": "12.2.0",
     "only-allow": "1.2.2",
     "yargs": "18.1.0",
     "yoctocolors": "2.2.0"
