@@ -5,3 +5,6 @@ packages:
 allowBuilds:
   'esbuild': true
   'proto-tailwindcss-clrs': true
+
+minimumReleaseAgeExclude:
+  - bumpp@12.2.2
