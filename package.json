@@ -19,6 +19,5 @@
     "only-allow": "1.2.2",
     "yargs": "18.2.0",
     "yoctocolors": "2.2.0"
-  },
-  "packageManager": "pnpm@12.18.0"
+  }
 }
